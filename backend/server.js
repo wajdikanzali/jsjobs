@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+let data = require('./jobs');
 
 app.use(bodyParser.json());
-
+console.log(data);
 const api = express.Router();
 
 api.get('/jobs', (req, res) => {
 
-	res.json({ success: true, message: 'hello word' });
+	res.json(data);
 
 });
 
