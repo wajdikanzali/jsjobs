@@ -12,6 +12,8 @@ export class JobService {
 	jobs = [];
 	jobsSubject = new Subject();
 
+  BASE_URL = 'http://localhost:4201/';
+
   constructor(private http:Http) { }
 
    getJobs(){
@@ -24,7 +26,7 @@ export class JobService {
 
     }else if (this.jobs.length > 0 && this.initialJobs.length === 0){
       console.log('case else if');
-      return this.http.get('data/jobs.json')
+      return this.http.get(this.BASE_URL + 'api/jobs')
                       .map(res => res.json())
                       .do(data => {
                         this.initialJobs = data;
@@ -32,9 +34,10 @@ export class JobService {
                       });
     }else {
       console.log('case else');
-      return this.http.get('data/jobs.json')
+      return this.http.get(this.BASE_URL + 'api/jobs')
                       .map(res => res.json())
                       .do(data => this.initialJobs = data);
+
     }
     
   }
