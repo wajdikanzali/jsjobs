@@ -38,6 +38,7 @@ api.post('/jobs', (req, res) =>{
 });
 
 api.get('/jobs/:id', (req, res) => {
+	console.log("*****",req);
 	const id = parseInt(req.params.id, 10);
 	const job = getAllJobs().filter(j => j.id === id);
 	if (job.length === 1){

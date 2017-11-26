@@ -39,4 +39,9 @@ export class JobService {
 
   }
 
+  getJob(id){
+    return this.http.get(this.BASE_URL+ `api/jobs/${id}`)
+              .map(res => res.json());
+  }
+
 }
