@@ -37,6 +37,16 @@ api.post('/jobs', (req, res) =>{
 
 });
 
+api.get('/jobs/:id', (req, res) => {
+	const id = parseInt(req.params.id, 10);
+	const job = getAllJobs().filter(j => j.id === id);
+	if (job.length === 1){
+		res.json({success: true, job: job[0]});
+	}else {
+		res.json({success: false, message: `pas de job ayant pour id ${id}`})
+	}
+});
+
 app.use('/api', api); //localhost:4201/api/jobs
 
 const port = 4201;
