@@ -70,6 +70,7 @@ export class JobAddFormComponent implements OnInit {
 
   createJob(jobData){
   	this.jobService.addJob(jobData).subscribe();
+    this.form.reset();
   }
 
 }
