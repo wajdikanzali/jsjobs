@@ -44,4 +44,10 @@ export class JobService {
               .map(res => res.json());
   }
 
+  searchJob(criteria){
+    console.log(criteria);
+    return this.http.get(`${this.BASE_URL}api/search/${criteria.term}/${criteria.place}`)
+                    .map(res => res.json());
+  }
+
 }
