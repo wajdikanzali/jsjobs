@@ -6,6 +6,9 @@ let data = require('./jobs');
 let initialJobs = data.jobs;
 let addedJobs = [];
 
+const fakeuser = {email: 'wajdi@test.fr', password: 'admin'};
+const jwt = require('jsonwebtoken');
+
 const getAllJobs = () => {
 	return [...addedJobs, ...initialJobs]
 };
@@ -14,12 +17,31 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 'Content-type');
+	res.header('Access-Control-Allow-Headers', 'Content-Type');
 	next();
 });
 
 
 const api = express.Router();
+const auth = express.Router();
+
+auth.post('/login', (req, res) => {
+	 if(req.body) {
+    const email = req.body.email.toLocaleLowerCase();
+    const password = req.body.password.toLocaleLowerCase();
+    if(email === fakeuser.email && password === fakeuser.password) {
+    	delete req.body.password;
+    	res.json({success: true, data: req.body});
+    } else {
+    	res.json({success: false, message: 'identifiants incorrectes'});
+    }
+  } else {
+  	res.json({success: false, message: 'données manquantes'});
+  }
+})
+
+   
+
 
 api.get('/jobs', (req, res) => {
 
@@ -61,6 +83,7 @@ api.get('/jobs/:id', (req, res) => {
 });
 
 app.use('/api', api); //localhost:4201/api/jobs
+app.use('/auth', auth);
 
 const port = 4201;
 
