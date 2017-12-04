@@ -15,7 +15,10 @@
 					<a href="#" routerLink="/about">à propos</a>
 				</li>
 				<li>
-					<a href="#" routerLink="/login">se connecter</a>
+					<a href="#" routerLink="/login" *ngIf="!authService.userIsLoggedIn()">se connecter</a>
+				</li>
+				<li>
+					<a href="#" (click)="authService.logOut()" *ngIf="authService.userIsLoggedIn()">se déconnecter</a>
 				</li>
 			</ul>
 		</div>
