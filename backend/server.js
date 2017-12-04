@@ -33,7 +33,7 @@ auth.post('/login', (req, res) => {
     if(email === fakeuser.email && password === fakeuser.password) {
     	delete req.body.password;
     	//res.json({success: true, data: req.body});
-    	const token = jwt.sign({ iss: 'http://localhost:4201', role: 'admin'}, secret);
+    	const token = jwt.sign({ iss: 'http://localhost:4201', role: 'admin', email: req.body.email}, secret);
     	res.json({ success: true, token: token });
     } else {
     	res.json({success: false, message: 'identifiants incorrectes'});
