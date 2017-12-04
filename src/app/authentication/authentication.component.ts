@@ -15,6 +15,13 @@ export class AuthenticationComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+  	if(localStorage.getItem('jbb-data')){
+  		this.refreshFlags();
+  	}
+  }
+
+  refreshFlags() {
+  	this.isAuthenticated = true;
   }
 
   login(formData){

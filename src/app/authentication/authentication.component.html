@@ -1,4 +1,4 @@
-  <h3>Connexion</h3>
+<div *ngIf="!isAuthenticated">
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
     <input type="text"
             class="login-input" 
@@ -14,3 +14,11 @@
             required>
     <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">se connecter</button>
   </form>
+  </div>
+
+  <div *ngIf="isAuthenticated">
+    {{welcomeMessage}}
+    <pre>
+      {{jbbData | json}}
+    </pre>
+  </div>
