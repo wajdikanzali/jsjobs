@@ -20,6 +20,9 @@
 				<li>
 					<a href="#" (click)="authService.logOut()" *ngIf="authService.userIsLoggedIn()">se déconnecter</a>
 				</li>
+				<li>
+					<a href="#" routerLink="/register" *ngIf="!authService.userIsLoggedIn()">créer un compte</a>
+				</li>
 			</ul>
 		</div>
 	</div>
