@@ -6,7 +6,8 @@ let data = require('./jobs');
 let initialJobs = data.jobs;
 let addedJobs = [];
 
-const fakeuser = {email: 'wajdi@test.fr', password: 'admin'};
+users = [];
+const fakeuser = {id: 1, email: 'wajdi@test.fr', password: 'admin'};
 const secret = 'qsdjS12ozehdoIJ123DJOZJLDSCqsdeffdg123ER56SDFZedhWXojqshduzaohduihqsDAqsdq';
 const jwt = require('jsonwebtoken');
 
@@ -43,7 +44,17 @@ auth.post('/login', (req, res) => {
   }
 })
 
-   
+auth.post('/register', (req, res) => {
+	console.log('register-backend: req.body', req.body);
+	if(req.body) {
+       const email = req.body.email.toLocaleLowerCase().trim();
+       const password = req.body.password.toLocaleLowerCase().trim();
+       users = [{id: Date.now(), email: email, password: password}, ...users];
+       res.json({success: true, users: users});
+	} else {
+		res.json({success: false, message: 'la création a échoué'});
+	}
+});
 
 
 api.get('/jobs', (req, res) => {
