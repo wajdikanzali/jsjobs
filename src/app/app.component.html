@@ -18,6 +18,9 @@
 					<a href="#" routerLink="/login" *ngIf="!authService.userIsLoggedIn()">se connecter</a>
 				</li>
 				<li>
+					<a href="#" routerLink="/profil" *ngIf="authService.userIsLoggedIn()">mon profil</a>
+				</li>
+				<li>
 					<a href="#" (click)="authService.logOut()" *ngIf="authService.userIsLoggedIn()">se déconnecter</a>
 				</li>
 				<li>

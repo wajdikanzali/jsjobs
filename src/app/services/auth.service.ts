@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import * as jwtDecode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
@@ -27,4 +28,8 @@ export class AuthService {
                .map(res => res.json());
     }
     
+    decodeToken(token) {
+      return jwtDecode(token);
+    }
+
    }
